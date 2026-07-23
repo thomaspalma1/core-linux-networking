@@ -17,7 +17,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.trigger.before :up do |trigger|
     trigger.name = "Create NAT Network (if needed)"
     trigger.run = {
-      inline: "bash -c 'if ! VBoxManage list natnetworks | grep -q \"#{NAT_NETWORK_NAME}\"; then VBoxManage natnetwork add --netname #{NAT_NETWORK_NAME} --network \"#{NAT_NETWORK_CIDR}\" --enable; fi'"
+      inline: "bash -c '" \
+              "if ! VBoxManage list natnetworks | grep -q \"#{NAT_NETWORK_NAME}\"; then " \
+              "  VBoxManage natnetwork add " \
+              "    --netname #{NAT_NETWORK_NAME} " \
+              "    --network \"#{NAT_NETWORK_CIDR}\" " \
+              "    --enable; " \
+              "fi'"
     }
   end
 
