@@ -1,7 +1,6 @@
 VAGRANTFILE_API_VERSION = "2"
 
-VM_NAME       = "Debian Server"
-VM_HOSTNAME   = "debian-server"
+# Shared configurations between the VMs
 VM_BOX        = "debian/bullseye64"
 VM_BOX_VER    = "11.20241217.1"
 
@@ -18,6 +17,7 @@ end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  # Create NAT network (executed before bringing the machines up)
   config.trigger.before :up do |trigger|
     trigger.name = "Create NAT Network (if needed)"
     trigger.run = {
@@ -26,19 +26,37 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
   end
 
+  # Global configurations (apply to all VMs defined below)
   config.vm.box         = VM_BOX
   config.vm.box_version = VM_BOX_VER
-  config.vm.hostname    = VM_HOSTNAME
+  config.disksize.size  = VM_DISK_SIZE
 
-  config.disksize.size = VM_DISK_SIZE
+  # VM 1: Debian Server
+  config.vm.define "server" do |server|
+    server.vm.hostname = "debian-server"
 
-  config.vm.provider "virtualbox" do |vb|
-    vb.name   = VM_NAME
-    vb.memory = VM_MEMORY
-    vb.cpus   = VM_CPUS
+    server.vm.provider "virtualbox" do |vb|
+      vb.name   = "Debian Server"
+      vb.memory = VM_MEMORY
+      vb.cpus   = VM_CPUS
 
-    vb.customize ["modifyvm", :id, "--nic1", "natnetwork"]
-    vb.customize ["modifyvm", :id, "--nat-network1", NAT_NETWORK_NAME]
+      vb.customize ["modifyvm", :id, "--nic1", "natnetwork"]
+      vb.customize ["modifyvm", :id, "--nat-network1", NAT_NETWORK_NAME]
+    end
+  end
+
+  # VM 2: Debian Client
+  config.vm.define "client" do |client|
+    client.vm.hostname = "debian-client"
+
+    client.vm.provider "virtualbox" do |vb|
+      vb.name   = "Debian Client"
+      vb.memory = VM_MEMORY
+      vb.cpus   = VM_CPUS
+
+      vb.customize ["modifyvm", :id, "--nic1", "natnetwork"]
+      vb.customize ["modifyvm", :id, "--nat-network1", NAT_NETWORK_NAME]
+    end
   end
 
 end
