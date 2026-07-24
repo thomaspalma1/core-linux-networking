@@ -1,15 +1,16 @@
 ---
-- name: Install Vim
+- name: Setup Vim environment
   hosts: all
-  become: false
   gather_facts: true
   tasks:
-    - name: Install Vim
+    - name: Install Vim (Requires root)
+      become: true
       ansible.builtin.package:
         name: vim
         state: present
 
-    - name: Copy the .vimrc file to the user's home directory        
+    - name: Copy the .vimrc file to the user's home directory
+      become: false  # Runs as the regular user (vagrant)
       ansible.builtin.copy:
         src: files/.vimrc
         dest: "/home/{{ ansible_user }}/.vimrc"
