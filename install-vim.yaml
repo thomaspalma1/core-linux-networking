@@ -1,0 +1,19 @@
+---
+- name: Install Vim
+  hosts: all
+  become: false
+  gather_facts: true
+  tasks:
+    - name: Install Vim
+      ansible.builtin.package:
+        name: vim
+        state: present
+
+    - name: Copy the .vimrc file to the user's home directory        
+      ansible.builtin.copy:
+        src: files/.vimrc
+        dest: "/home/{{ ansible_user }}/.vimrc"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0644'
+        backup: yes
