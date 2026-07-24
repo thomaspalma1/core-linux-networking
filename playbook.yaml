@@ -1,10 +1,2 @@
----
-- name: Update VM packages
-  hosts: all
-  become: true
-
-  tasks:
-    - name: Update the apt cache and upgrade all packages
-      ansible.builtin.apt:
-        update_cache: true
-        upgrade: true
+- import_playbook: update-os.yaml
+- import_playbook: install-vim.yaml
