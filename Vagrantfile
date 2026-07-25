@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Ansible Provisioner
     # We place it in the last VM block so it runs only once after both machines are up
     client.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbook.yaml"
+      ansible.playbook = "ansible/main.yaml"
       ansible.limit = "all" # Tells Ansible to apply the playbook to all VMs in the inventory
     end
   end
