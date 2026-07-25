@@ -1,2 +1,10 @@
-- import_playbook: update-os.yaml
-- import_playbook: install-vim.yaml
+---
+- name: Common configuration for all VMs
+  hosts: all
+  become: true
+  tasks:
+    - name: Update OS
+      import_tasks: tasks/update-os.yaml
+
+    - name: Install and configure vim
+      import_tasks: tasks/vim/install-vim.yaml
