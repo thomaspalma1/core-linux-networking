@@ -9,8 +9,10 @@
 
 The documentation will be expanded in the future. For now, here are a few key points to provide context for the project.
 
-- The primary goal of this repository is to review, practice, and deepen my understanding of computer networking fundamentals and concepts, with a focus on **Linux** environments.
+Keep in mind that Vagrant and Ansible are not required to develop this project. I chose to include them to automate infrastructure provisioning and to explore how these two technologies complement each other. Although they serve different purposes, they work together effectively in this context.
 
-- **Vagrant** is used to automate the creation, startup, and destruction of virtual machines, making it easier to manage the study environment.
+Most of the work in this repository is performed directly from the command line (CLI), so there will be relatively few version-controlled files. Please keep this in mind when reviewing the repository's structure and organization.
 
-- **Ansible** is responsible for infrastructure provisioning and machine configuration. This eliminates the need to manually access each VM to perform the same tasks on both the client and the server, ensuring greater consistency and automation across the environment.
+> [!NOTE]
+> - [**Vagrant**](https://developer.hashicorp.com/vagrant) is used to automate the creation, startup, and destruction of virtual machines, making it easier to manage the study environment.
+> - [**Ansible**](https://docs.ansible.com/) is responsible for infrastructure provisioning and machine configuration. This eliminates the need to manually access each VM to perform the same tasks on both the client and the server, ensuring greater consistency and automation across the environment.
