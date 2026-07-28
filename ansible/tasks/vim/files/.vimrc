@@ -39,9 +39,7 @@ set virtualedit=onemore   " Allows the cursor to move one column beyond the end 
 " -- Encoding --
 set encoding=utf-8     " Set file encoding to UTF-8
 
-" -----------------------------------------------------------
-" ------------------------ KEYMAPS --------------------------
-" -----------------------------------------------------------
+" -- Keymaps --
 
 " -- Auto-Pairs (Insert Mode) --
 " Automatically close parentheses, brackets, braces, and quotes.
@@ -73,14 +71,6 @@ vnoremap { c{}<Esc>P
 vnoremap } c{}<Esc>P
 vnoremap ' c''<Esc>P
 vnoremap " c""<Esc>P
-
-" -- Move Lines (Normal Mode) --
-" Moves the current line up or down while keeping the correct indentation.
-" Mechanics: Uses the command-line command ':m' to move the current line ('.')
-" down (+1) or up (-2). '<CR>' executes the command, and '==' re-indents the line.
-
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
 
 " Allow a fast and ergonomic exit from insert mode by mapping the 'jk' 
 " sequence to the Escape key, keeping hands positioned on the home row.
